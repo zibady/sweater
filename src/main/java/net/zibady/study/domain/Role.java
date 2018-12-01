@@ -1,7 +1,13 @@
 package net.zibady.study.domain;
 
-/**
- * Created by zibady on 11/30/18.
- */
-public enum Role {
+import org.springframework.security.core.GrantedAuthority;
+
+public enum Role implements GrantedAuthority {
+    USER;
+
+    @Override
+    public String getAuthority() {
+        return name();
+    }
 }
+

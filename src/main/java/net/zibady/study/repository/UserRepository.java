@@ -1,7 +1,8 @@
 package net.zibady.study.repository;
 
-/**
- * Created by zibady on 11/30/18.
- */
-public interface UserRepository {
+import net.zibady.study.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUsername(String username);
 }

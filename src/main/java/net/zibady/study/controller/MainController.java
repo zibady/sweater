@@ -1,4 +1,4 @@
-package net.zibady.study;
+package net.zibady.study.controller;
 
 import net.zibady.study.domain.Message;
 import net.zibady.study.repository.MessageRepository;

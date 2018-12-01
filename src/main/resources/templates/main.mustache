@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<html lang="ru">
     <head>
         <meta charset="UTF-8">
         <title>Spring come!</title>
     </head>
 
     <body>
-        <div>
-            <h1 align="right">YOU CAN, DO IT!</h1>
-        </div>
+        <form action="/logout" method="post">
+            <input type="submit" value="Sign Out"/>
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+        </form>
 
         <div>
             <form method="post">
                 <input type="text" name="text" placeholder="Введите сообщение" />
                 <input type="text" name="tag" placeholder="Тэг" />
+                <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
                 <button type="submit">Добавить</button>
             </form>
         </div>
@@ -23,6 +25,7 @@
         </div>
         <form method="post" action="filter" >
             <input type="text" name="filter">
+            <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
             <button type="submit">Найти</button>
         </form>
         {{#messages}}
