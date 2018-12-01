@@ -1,0 +1,11 @@
+# Folders #
+out
+target
+src/main/resources/templates/tmp
+
+
+# IntelliJ IDEA #
+.idea
+*.iml
+*.ipr
+
