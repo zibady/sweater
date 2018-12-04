@@ -21,7 +21,7 @@
             </li>
             </#if>
         </ul>
-        <div class="navbar-text mr-3">${name}</div>
+        <div class="navbar-text text-info mr-3">${name}</div>
         <#if known>
             <@l.logout />
         </#if>
