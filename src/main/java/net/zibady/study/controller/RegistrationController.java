@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class RegistrationController {
@@ -24,12 +23,10 @@ public class RegistrationController {
     public String addUser(User user, Model model/*, RedirectAttributes redirectAttributes*/) {
         if (!userService.registerUser(user)) {
             model.addAttribute("message", "User exists!");
-            return "registration";
         }
-//        redirectAttributes.addAttribute("message", "Confirm registration by clicking the hyperlink sent to the email address you specified.");
+        model.addAttribute("message", "Confirm registration by clicking the hyperlink sent to the email address you specified.");
 
-        return "redirect:/login";
-//        return new ModelAndView("redirect:/redirectedUrl", model);
+        return "registration";
     }
 
     @GetMapping("/activate/{code}")

@@ -19,10 +19,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-/**
- * Created by zibady on 11/28/18.
- */
-
 
 @Controller
 @RequestMapping(path="/")
