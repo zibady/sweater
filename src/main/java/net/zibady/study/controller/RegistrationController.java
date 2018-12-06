@@ -20,7 +20,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addUser(User user, Model model/*, RedirectAttributes redirectAttributes*/) {
+    public String addUser(User user, Model model) {
         if (!userService.registerUser(user)) {
             model.addAttribute("message", "User exists!");
         }
