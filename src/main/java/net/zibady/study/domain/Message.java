@@ -1,6 +1,9 @@
 package net.zibady.study.domain;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 /**
  * Created by zibady on 11/28/18.
@@ -8,10 +11,13 @@ import javax.persistence.*;
 @Entity // This tells Hibernate to make a table out of this class
 public class Message {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank(message = "Please fill the message")
+    @Length(max = 2048, message = "Message to long (more than 2 kB)")
     private String text;
+    @Length(max = 255, message = "Tag to long (more than 255)")
     private String tag;
 
     @ManyToOne(fetch = FetchType.EAGER)

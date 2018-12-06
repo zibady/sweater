@@ -3,22 +3,56 @@
     <div class="form-group row">
         <label for="inputUsername" class=" col-sm-3 col-md-2 col-form-label">User Name:</label>
         <div class="col-sm-6">
-            <input id="inputUsername" type="text" name="username" class="form-control" placeholder="Enter your username"/>
+            <input id="inputUsername" type="text" name="username" value="<#if user??>${user.username}</#if>"
+                   class="form-control ${(usernameError??)?string('is-invalid', '')}"
+                   placeholder="Enter your username"/>
+            <#if usernameError??>
+                <div class="invalid-feedback">
+                ${usernameError}
+                </div>
+            </#if>
         </div>
     </div>
     <div class="form-group row">
         <label for="inputPassword" class="col-sm-3 col-md-2 col-form-label">Password:</label>
         <div class="col-sm-6">
-            <input id="inputPassword" type="password" name="password" class="form-control" placeholder="Enter a password"/>
+            <input id="inputPassword" type="password" name="password"
+                   class="form-control ${(passwordError??)?string('is-invalid', '')}"
+                   placeholder="Enter a password"/>
+            <#if passwordError??>
+                <div class="invalid-feedback">
+                ${passwordError}
+                </div>
+            </#if>
         </div>
     </div>
     <#if isRegisterForm>
-        <div class="form-group row">
-            <label for="inputEmail" class="col-sm-3 col-md-2 col-form-label">Email:</label>
-            <div class="col-sm-6">
-                <input id="inputEmail" type="email" name="email" class="form-control" placeholder="Enter your email address"/>
-            </div>
+    <div class="form-group row">
+        <label for="inputPassword2" class="col-sm-3 col-md-2 col-form-label">Password:</label>
+        <div class="col-sm-6">
+            <input id="inputPassword2" type="password" name="password2"
+                   class="form-control ${(password2Error??)?string('is-invalid', '')}"
+                   placeholder="Confirm a password"/>
+            <#if password2Error??>
+                <div class="invalid-feedback">
+                ${password2Error}
+                </div>
+            </#if>
         </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputEmail" class="col-sm-3 col-md-2 col-form-label">Email:</label>
+        <div class="col-sm-6">
+            <input id="inputEmail" type="email" name="email" value="<#if user??>${user.email}</#if>"
+                   class="form-control ${(emailError??)?string('is-invalid', '')}"
+                   placeholder="Enter your email address"/>
+            <#if emailError??>
+                <div class="invalid-feedback">
+                ${emailError}
+                </div>
+            </#if>
+        </div>
+    </div>
     </#if>
     <div class="form-inline mb-3">
         <button type="submit" class="btn btn-primary">${button_name}</button>
