@@ -9,8 +9,10 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -26,7 +28,8 @@ public class UserController {
 
         return "userList";
     }
-    @PreAuthorize("hasAuthority('ADMIN')") // вказується хто має доступ
+
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{user}")
     public String userEditForm(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
@@ -34,7 +37,8 @@ public class UserController {
 
         return "userEdit";
     }
-    @PreAuthorize("hasAuthority('ADMIN')") // вказується хто має доступ
+
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public String userSave(
             @RequestParam String username,
@@ -48,7 +52,6 @@ public class UserController {
 
     @GetMapping("profile")
     public String getProfile(Model model, @AuthenticationPrincipal User user) {
-        model.addAttribute("username", user.getUsername());
         model.addAttribute("email", user.getEmail());
 
         return "profile";
@@ -56,11 +59,26 @@ public class UserController {
 
     @PostMapping("profile")
     public String updateProfile(
-            @AuthenticationPrincipal User user,
-            @RequestParam String password,
-            @RequestParam String email
+            @RequestParam(name = "password2") String password2,
+            @AuthenticationPrincipal User current, //- get current active user*/
+            @Valid User user, //Spring will automatically create user???
+            BindingResult bindingResult,
+            Model model
     ) {
-        userService.updateProfile(user, password, email);
+        if (user.getPassword() != null && !user.getPassword().equals(password2)) {
+            model.addAttribute("passwordError", "Passwords are different!");
+        }
+
+        if (bindingResult.hasErrors() || model.containsAttribute("passwordError")) {
+            Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
+            model.mergeAttributes(errors);
+
+            return "profile";
+        }
+
+        userService.updateProfile(current, password2, user.getEmail());
+
         return "profile";
+
     }
 }

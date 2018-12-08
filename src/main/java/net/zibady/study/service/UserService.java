@@ -104,5 +104,9 @@ public class UserService implements UserDetailsService{
         if (isEmailChanged) {
             user.setEmail(email);
         }
+        if (password != null) {
+            user.setPassword(password);
+        }
+        userRepository.save(user);
     }
 }
