@@ -1,6 +1,7 @@
 package net.zibady.study.service;
 
 import net.zibady.study.domain.Role;
+import net.zibady.study.domain.Sex;
 import net.zibady.study.domain.User;
 import net.zibady.study.repository.UserRepository;
 
@@ -42,8 +43,23 @@ public class UserService implements UserDetailsService{
 
         user.setActive(false);
         user.setRoles(Collections.singleton(Role.USER));
+//        user.setSex(sex);
+
         user.setActivationCode(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+        switch (user.getSex()) {
+            case FEMALE: {
+                user.setAvatarPhoto("/static/avatar_female.png");
+            } break;
+            case MALE: {
+                user.setAvatarPhoto("/static/avatar_male.png");
+            } break;
+            default: {
+                user.setSex("unknown");
+                user.setAvatarPhoto("/static/avatar_male.png");
+            } break;
+        }
 
         userRepository.save(user);
 
@@ -79,7 +95,7 @@ public class UserService implements UserDetailsService{
         return userRepository.findAll();
     }
 
-    public void saveUser(User user, String username, Map<String, String> form) {
+    public void saveUserRole(User user, String username, Map<String, String> form) {
         user.setUsername(username);
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
@@ -96,17 +112,32 @@ public class UserService implements UserDetailsService{
         userRepository.save(user);
     }
 
-    public void updateProfile(User user, String password, String email) {
+    public void updateProfile(User user, Map<String, String> form) {
         String userEmail = user.getEmail();
+        String email = form.get("email");
+        String password = form.get("password");
+        String sex = form.get("sex");
+        String photo = form.get("photo");
+
 
         boolean isEmailChanged = (userEmail != null && !userEmail.equals(email) ||
                 (email != null && !email.equals(userEmail)));
-        if (isEmailChanged) {
+        if (isEmailChanged && !email.isEmpty()) {
             user.setEmail(email);
         }
-        if (password != null) {
-            user.setPassword(password);
+
+        if (password != null && !password.isEmpty()) {
+            user.setPassword(passwordEncoder.encode(password));
         }
+
+        if (sex != null && !sex.isEmpty()) {
+            user.setSex(sex);
+        }
+
+        if (photo != null) {
+            user.setAvatarPhoto(photo);
+        }
+
         userRepository.save(user);
     }
 }

@@ -5,9 +5,6 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-/**
- * Created by zibady on 11/28/18.
- */
 @Entity // This tells Hibernate to make a table out of this class
 public class Message {
     @Id

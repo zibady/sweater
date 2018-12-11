@@ -19,11 +19,11 @@
             <div class="form-group">
                 <input type="text" name="text" class="form-control ${(textError??)?string('is-invalid', '')}"
                        value="<#if message??>${message.text}</#if>" placeholder="Enter message" />
-            <#if textError??>
-                <div class="invalid-feedback">
-                ${textError}
-                </div>
-            </#if>
+                <#if textError??>
+                    <div class="invalid-feedback">
+                    ${textError}
+                    </div>
+                </#if>
             </div>
             <div class="form-group">
                 <input type="text" name="tag" class="form-control ${(tagError??)?string('is-invalid', '')}"
@@ -53,8 +53,8 @@
                 <img src="/img/${message.filename}" class="card-img-top">
             </#if>
             <div class="m-2">
-                <span>${message.text}</span>
-                <i>${message.tag}</i>
+                <span>${message.text}</span><br/>
+                <i>#${message.tag}</i>
             </div>
             <div class="card-footer text-muted">
                 <div class="card-text" align="right">

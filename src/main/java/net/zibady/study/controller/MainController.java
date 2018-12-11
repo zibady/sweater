@@ -3,6 +3,7 @@ package net.zibady.study.controller;
 import net.zibady.study.domain.Message;
 import net.zibady.study.domain.User;
 import net.zibady.study.repository.MessageRepository;
+import net.zibady.study.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -31,10 +32,13 @@ public class MainController {
     @Autowired
     private MessageRepository messageRepository;
 
+    @Autowired
+    private MessageService messageService;
+
     @Value("${upload.path}")
     private String uploadPath;
 
-    @GetMapping("/")
+    @GetMapping
     public String greeting() {
         return "greeting";
     }
@@ -64,8 +68,6 @@ public class MainController {
             Model model
    ) throws IOException {
 
-       message.setAuthor(user);
-
        if (bindingResult.hasErrors()) {
            Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
 
@@ -73,22 +75,11 @@ public class MainController {
            model.addAttribute("message", message);
 
        } else {
-           if (file != null && !file.getOriginalFilename().isEmpty()) {
-               File uploadDirectory = new File(uploadPath);
-               if (!uploadDirectory.exists()) {
-                   uploadDirectory.mkdir();
-               }
-
-               String uuidFile = UUID.randomUUID().toString();
-               String resultFilename = uuidFile + "." + file.getOriginalFilename();
-               file.transferTo(new File(uploadPath + "/" + resultFilename));
-
-               message.setFilename(resultFilename);
-           }
+           message.setAuthor(user);
+           messageService.saveMessage(message, ControllerUtils.getNewFile(file, uploadPath));
 
            model.addAttribute("message", null);
 
-           messageRepository.save(message);
        }
 
        Iterable<Message> messages = messageRepository.findAll();
@@ -97,4 +88,5 @@ public class MainController {
 
         return "main";
    }
+
 }

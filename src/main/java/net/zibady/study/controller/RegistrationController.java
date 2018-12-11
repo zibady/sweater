@@ -27,8 +27,9 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String addUser(
             @RequestParam(name = "password2") String password2,
-            @Valid User user,
-            BindingResult bindingResult,
+//            @RequestParam(name = "sex") String sex,
+            @Valid User user, //Spring will automatically create user???
+            BindingResult bindingResult, //Validation result
             Model model) {
         if (user.getPassword() != null && !user.getPassword().equals(password2)) {
             model.addAttribute("passwordError", "Passwords are different!");
@@ -41,7 +42,7 @@ public class RegistrationController {
             return "registration";
         }
 
-        if (!userService.registerUser(user)) {
+        if (!userService.registerUser(user)) { //todo change method type and logic
             model.addAttribute("usernameError", "User exists!");
 
             return "registration";

@@ -5,14 +5,15 @@ import net.zibady.study.domain.Role;
 import net.zibady.study.domain.User;
 import net.zibady.study.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
+import java.io.IOException;
 import java.util.Map;
 
 @Controller
@@ -21,7 +22,10 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasAuthority('ADMIN')") // вказується хто має доступ
+    @Value("${upload.path}")
+    private String uploadPath;
+
+    @PreAuthorize("hasAuthority('ADMIN')") // described who has access
     @GetMapping
     public String userList(Model model) {
         model.addAttribute("users", userService.findAll());
@@ -40,17 +44,18 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
-    public String userSave(
+    public String userChangeRole(
             @RequestParam String username,
             @RequestParam Map<String, String> form,
             @RequestParam("userId") User user
     ) {
-        userService.saveUser(user, username, form);
+        userService.saveUserRole(user, username, form);
 
         return "redirect:user";
     }
 
     @GetMapping("profile")
+    //@AuthenticationPrincipal User user - get current active user from context ???
     public String getProfile(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("email", user.getEmail());
 
@@ -59,26 +64,22 @@ public class UserController {
 
     @PostMapping("profile")
     public String updateProfile(
-            @RequestParam(name = "password2") String password2,
-            @AuthenticationPrincipal User current, //- get current active user*/
-            @Valid User user, //Spring will automatically create user???
-            BindingResult bindingResult,
+            @RequestParam("password") String password,
+            @RequestParam("password2") String password2,
+            @RequestParam("file") MultipartFile file,
+            @RequestParam Map<String, String> form,
+            @AuthenticationPrincipal User user,
             Model model
-    ) {
-        if (user.getPassword() != null && !user.getPassword().equals(password2)) {
+    ) throws IOException {
+        if (password != null && !password.equals(password2)) {
             model.addAttribute("passwordError", "Passwords are different!");
+
+            return "redirect:profile";
         }
+        form.put("photo", ControllerUtils.getNewFile(file, uploadPath));
+        userService.updateProfile(user, form);
 
-        if (bindingResult.hasErrors() || model.containsAttribute("passwordError")) {
-            Map<String, String> errors = ControllerUtils.getErrors(bindingResult);
-            model.mergeAttributes(errors);
-
-            return "profile";
-        }
-
-        userService.updateProfile(current, password2, user.getEmail());
-
-        return "profile";
+        return "redirect:profile";
 
     }
 }

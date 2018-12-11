@@ -11,6 +11,7 @@
     <#-- we can use users methods -->
         name = user.getUsername()
         isAdmin = user.isAdmin()
+        <#--photo = user.getAvatarPhoto()-->
     >
 <#else>
     <#assign

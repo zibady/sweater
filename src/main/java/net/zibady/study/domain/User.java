@@ -22,6 +22,10 @@ public class User implements UserDetails{
     @Email(message = "Email is not correct")
     @NotBlank(message = "Email can't be empty")
     private String email;
+
+    private String avatarPhoto;
+    private Sex sex;
+
     private String activationCode;
     private boolean active;
 
@@ -29,6 +33,9 @@ public class User implements UserDetails{
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<Message> messages;
 
     @Override
     public boolean isAccountNonExpired() {
@@ -114,4 +121,34 @@ public class User implements UserDetails{
     public void setActivationCode(String activationCode) {
         this.activationCode = activationCode;
     }
+
+    public String getAvatarPhoto() {
+        return avatarPhoto;
+    }
+
+    public void setAvatarPhoto(String avatarPhoto) {
+        this.avatarPhoto = avatarPhoto;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = Sex.valueOf(sex);
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+
 }

@@ -3,8 +3,14 @@
 
 <@c.page>
 <h3 class="h3 mb-3 font-weight-normal">${name}</h3>
-<form method="post" class="form-signin">
-       <div class="form-group row">
+<form method="post" <#--class="form-signin"--> enctype="multipart/form-data">
+    <div class="form-group">
+        <div class="custom-file">
+            <input type="file" name="file" value="file" class="custom-file-input" id="avatarPhoto">
+            <label class="custom-file-label" for="avatarPhoto">Choose file</label>
+        </div>
+    </div>
+    <div class="form-group row">
         <label class="col-sm-3 col-md-2 col-form-label">New password:</label>
         <div class="col-sm-6">
             <input type="password" name="password"
@@ -36,6 +42,19 @@
                 ${emailError}
                 </div>
             </#if>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-md-2 col-form-label">Sex:</label>
+        <div class="col-sm-6">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline1" name="sex" value="MALE" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline1">Male</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline2" name="sex" value="FEMALE" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline2">Female</label>
+            </div>
         </div>
     </div>
     <input type="hidden" name="_csrf" value="${_csrf.token}" />

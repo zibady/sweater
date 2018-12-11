@@ -53,6 +53,19 @@
             </#if>
         </div>
     </div>
+    <div class="form-group row">
+        <label class="col-sm-3 col-md-2 col-form-label">Sex:</label>
+        <div class="col-sm-6">
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline1" name="sex" value="MALE" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline1">Male</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline2" name="sex" value="FEMALE" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline2">Female</label>
+            </div>
+        </div>
+    </div>
     </#if>
     <div class="form-inline mb-3">
         <button type="submit" class="btn btn-primary">${button_name}</button>
