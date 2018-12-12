@@ -3,15 +3,15 @@
 
 <@c.page>
 <div>List of users</div>
-<table>
-    <thead>
+<table class="table table-bordered table-hover" style="width: 70%">
+    <thead class="thead-light">
     <tr>
         <th>Name</th>
         <th>Role</th>
         <th></th>
     </tr>
     </thead>
-    <tbody>
+    <tbody class="">
         <#list users as user>
             <tr>
                 <td>${user.username}</td>

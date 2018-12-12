@@ -3,23 +3,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" charset="UTF-8">
-    <link rel="icon" type="image/x-icon" href="/static/favicon.ico">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Sweater</title>
-
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="icon" href="/static/favicon.ico">
 </head>
+
 <body>
     <#include "navbar.ftl">
-    <div class="container-fluid<#-- mt-5-->"> <!-- Bootstrap aligning content -->
-        <div class="row flex-xl-nowrap">
-            <div class="col-12 col-md-3 col-xl-2 bd-sidebar">
-                <#--<#if known>-->
-                <#--<img src="${photo}" class="avatar">-->
-                <#--</#if>-->
-            </div>
-            <main class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5 bd-content" role="main">
+    <div class="container-fluid mt-3"> <!-- Bootstrap aligning content -->
+        <div class="row">
+                <nav class="col-md-2 d-none d-md-block sidebar">
+                <#if known>
+                <img src="/img/${photo}" class="rounded-circle my-4" style="width:100%">
+                    <div class="sidebar-sticky ml-3 mt-4">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/user-messages/${currentUserId}">My message</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="/">Dialogs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Dashboard</a>
+                            </li>
+                        </ul>
+                    </div>
+                </#if>
+                </nav>
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-4" role="main">
             <#nested>
             </main>
         </div>

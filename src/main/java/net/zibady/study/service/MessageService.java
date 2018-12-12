@@ -14,4 +14,15 @@ public class MessageService {
         message.setFilename(file);
         messageRepository.save(message);
     }
+
+    public void updateMessage(Message message, Message newMessage, String file) {
+
+        if (file != null && !file.isEmpty()) {
+            message.setFilename(file);
+        }
+        message.setTag(newMessage.getTag());
+        message.setText(newMessage.getText());
+
+        messageRepository.save(message);
+    }
 }

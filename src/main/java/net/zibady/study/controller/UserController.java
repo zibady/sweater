@@ -71,10 +71,12 @@ public class UserController {
             @AuthenticationPrincipal User user,
             Model model
     ) throws IOException {
-        if (password != null && !password.equals(password2)) {
+        if ((password != null && !password.equals(password2)) ||
+            (password2 != null && !password2.equals(password))) {
+
             model.addAttribute("passwordError", "Passwords are different!");
 
-            return "redirect:profile";
+            return "profile";
         }
         form.put("photo", ControllerUtils.getNewFile(file, uploadPath));
         userService.updateProfile(user, form);

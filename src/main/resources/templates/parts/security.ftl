@@ -11,11 +11,13 @@
     <#-- we can use users methods -->
         name = user.getUsername()
         isAdmin = user.isAdmin()
-        <#--photo = user.getAvatarPhoto()-->
+        photo = user.getAvatarPhoto()
+        currentUserId = user.getId()
     >
 <#else>
     <#assign
         name = "Guest"
         isAdmin = false
+        currentUserId = -1
     >
 </#if>

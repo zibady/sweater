@@ -5,9 +5,9 @@
 <h3 class="h3 mb-3 font-weight-normal">${name}</h3>
 <form method="post" <#--class="form-signin"--> enctype="multipart/form-data">
     <div class="form-group">
-        <div class="custom-file">
+        <div class="custom-file col-sm-8">
             <input type="file" name="file" value="file" class="custom-file-input" id="avatarPhoto">
-            <label class="custom-file-label" for="avatarPhoto">Choose file</label>
+            <label class="custom-file-label" for="avatarPhoto">Choose avatar photo</label>
         </div>
     </div>
     <div class="form-group row">
