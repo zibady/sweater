@@ -30,7 +30,7 @@ public class UserController {
     public String userList(Model model) {
         model.addAttribute("users", userService.findAll());
 
-        return "userList";
+        return "controlPanel";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -45,11 +45,10 @@ public class UserController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public String userChangeRole(
-            @RequestParam String username,
             @RequestParam Map<String, String> form,
             @RequestParam("userId") User user
     ) {
-        userService.saveUserRole(user, username, form);
+        userService.saveUserRole(user, form);
 
         return "redirect:user";
     }
@@ -84,4 +83,5 @@ public class UserController {
         return "redirect:profile";
 
     }
+
 }

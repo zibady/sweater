@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -36,6 +37,14 @@ public class User implements UserDetails{
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Message> messages;
+
+    @ManyToMany (fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "users_dialogs",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "dialog_id") }
+    )
+    private List<Dialog> dialogs;
 
     @Override
     public boolean isAccountNonExpired() {
@@ -148,6 +157,14 @@ public class User implements UserDetails{
 
     public void setSex(Sex sex) {
         this.sex = sex;
+    }
+
+    public List<Dialog> getDialogs() {
+        return dialogs;
+    }
+
+    public void setDialogs(List<Dialog> dialogs) {
+        this.dialogs = dialogs;
     }
 
     @Override

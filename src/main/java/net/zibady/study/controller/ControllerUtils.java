@@ -1,6 +1,5 @@
 package net.zibady.study.controller;
 
-import net.zibady.study.domain.Message;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.multipart.MultipartFile;

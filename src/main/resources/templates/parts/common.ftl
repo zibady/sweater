@@ -1,4 +1,5 @@
 <#include "security.ftl">
+
 <#macro page>
 <!DOCTYPE html>
 <html lang="en">
@@ -6,9 +7,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Sweater</title>
+    <link rel="icon" href="/static/favicon.ico" type="image/x-icon">
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <link rel="icon" href="/static/favicon.ico">
 </head>
 
 <body>
@@ -24,7 +25,7 @@
                                 <a class="nav-link active" href="/user-messages/${currentUserId}">My message</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/">Dialogs</a>
+                                <a class="nav-link active" href="/user/dialogs">Dialogs</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="#">Dashboard</a>

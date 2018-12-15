@@ -51,7 +51,6 @@ public class MessageController {
             BindingResult bindingResult,
             Model model
     ) throws IOException {
-//        Set<Message> messages = user.getMessages();
 
         if (bindingResult.hasErrors()) {
             Map<String, String> errorsMap = ControllerUtils.getErrors(bindingResult);
@@ -65,8 +64,9 @@ public class MessageController {
             model.addAttribute("message", null);
         }
 
-//        model.addAttribute("messages", messages);
 
         return "redirect:/user-messages/" + user;
     }
+
+
 }

@@ -48,14 +48,14 @@ public class UserService implements UserDetailsService{
 
         switch (user.getSex()) {
             case FEMALE: {
-                user.setAvatarPhoto("/static/avatar_female.png");
+                user.setAvatarPhoto("avatar_female.png");
             } break;
             case MALE: {
-                user.setAvatarPhoto("/static/avatar_male.png");
+                user.setAvatarPhoto("avatar_male.png");
             } break;
             default: {
                 user.setSex("unknown");
-                user.setAvatarPhoto("/static/avatar_male.png");
+                user.setAvatarPhoto("avatar_male.png");
             } break;
         }
 
@@ -93,8 +93,8 @@ public class UserService implements UserDetailsService{
         return userRepository.findAll();
     }
 
-    public void saveUserRole(User user, String username, Map<String, String> form) {
-        user.setUsername(username);
+    public void saveUserRole(User user, Map<String, String> form) {
+
         Set<String> roles = Arrays.stream(Role.values())
                 .map(Role::name)
                 .collect(Collectors.toSet());
