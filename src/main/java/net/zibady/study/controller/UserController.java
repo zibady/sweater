@@ -1,8 +1,8 @@
 package net.zibady.study.controller;
 
 
-import net.zibady.study.domain.Role;
 import net.zibady.study.domain.User;
+import net.zibady.study.domain.enums.Role;
 import net.zibady.study.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping
 public class UserController {
     @Autowired
     private UserService userService;
@@ -26,15 +26,15 @@ public class UserController {
     private String uploadPath;
 
     @PreAuthorize("hasAuthority('ADMIN')") // described who has access
-    @GetMapping
-    public String userList(Model model) {
+    @GetMapping("/control")
+    public String controlPanel(Model model) {
         model.addAttribute("users", userService.findAll());
 
         return "controlPanel";
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @GetMapping("{user}")
+    @GetMapping("/user/{user}")
     public String userEditForm(@PathVariable User user, Model model) {
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
@@ -43,17 +43,24 @@ public class UserController {
     }
 
     @PreAuthorize("hasAuthority('ADMIN')")
-    @PostMapping
+    @PostMapping("/user/{user}")
     public String userChangeRole(
             @RequestParam Map<String, String> form,
             @RequestParam("userId") User user
     ) {
         userService.saveUserRole(user, form);
 
-        return "redirect:user";
+        return "redirect:/control";
     }
 
-    @GetMapping("profile")
+    @GetMapping("/users")
+    public String userList(Model model) {
+        model.addAttribute("users", userService.findAll());
+
+        return "userList";
+    }
+
+    @GetMapping("/user/profile")
     //@AuthenticationPrincipal User user - get current active user from context ???
     public String getProfile(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("email", user.getEmail());
@@ -61,7 +68,7 @@ public class UserController {
         return "profile";
     }
 
-    @PostMapping("profile")
+    @PostMapping("/user/profile")
     public String updateProfile(
             @RequestParam("password") String password,
             @RequestParam("password2") String password2,

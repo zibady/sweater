@@ -1,4 +1,4 @@
-package net.zibady.study.domain;
+package net.zibady.study.domain.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

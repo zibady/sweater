@@ -1,7 +1,7 @@
 package net.zibady.study.service;
 
-import net.zibady.study.domain.Role;
 import net.zibady.study.domain.User;
+import net.zibady.study.domain.enums.Role;
 import net.zibady.study.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

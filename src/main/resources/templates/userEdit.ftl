@@ -1,8 +1,9 @@
 <#import "parts/common.ftl" as c>
 
 <@c.page>
-    <h3 class="h3 mb-3 font-weight-normal">${user.username}</h3>
-    <form action="/user" method="post">
+    <img class="mx-3 my-2 rounded-circle" src="/img/${user.avatarPhoto}" width="60" height="60" alt="">
+    <h5 class="h3 mx-3 font-weight-normal text-success">@${user.username}</h5>
+    <form method="post">
         <#list roles as role>
             <div>
                 <label><input type="checkbox" name="${role}" ${user.roles?seq_contains(role)?string("checked", "")}>${role}</label>

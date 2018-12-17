@@ -1,5 +1,7 @@
 package net.zibady.study.domain;
 
+import net.zibady.study.domain.enums.Role;
+import net.zibady.study.domain.enums.Sex;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

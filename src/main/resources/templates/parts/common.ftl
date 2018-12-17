@@ -25,10 +25,10 @@
                                 <a class="nav-link active" href="/user-messages/${currentUserId}">My message</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="/user/dialogs">Dialogs</a>
+                                <a class="nav-link active" href="/user/dialogs">My Dialogs</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Dashboard</a>
+                                <a class="nav-link active" href="/users">All users</a>
                             </li>
                         </ul>
                     </div>

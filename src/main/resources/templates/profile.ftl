@@ -2,8 +2,9 @@
 <#include "parts/security.ftl">
 
 <@c.page>
-<h3 class="h3 mb-3 font-weight-normal">${name}</h3>
-<form method="post" <#--class="form-signin"--> enctype="multipart/form-data">
+<img class="mx-3 my-2 rounded-circle" src="/img/${photo}" width="60" height="60" alt="">
+<h5 class="h3 mx-3 font-weight-normal text-success">@${name}</h5>
+<form method="post" enctype="multipart/form-data">
     <div class="form-group">
         <div class="custom-file col-sm-8">
             <input type="file" name="file" value="file" class="custom-file-input" id="avatarPhoto">

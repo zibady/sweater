@@ -11,7 +11,7 @@
     </h6>
     <#list messages as m>
         <div class="media text-muted pt-3">
-            <img class="mr-3 rounded-circle" src="/img/message.jpg<#---->" width="60" height="60" alt="">
+            <img class="mr-3 rounded-circle" src="/img/${m.author.avatarPhoto}<#---->" width="60" height="60" alt="">
             <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
             <strong class="d-block text-gray-dark">@${m.author.username}</strong>
                 ${m.text}
