@@ -64,6 +64,7 @@ public class UserController {
     //@AuthenticationPrincipal User user - get current active user from context ???
     public String getProfile(Model model, @AuthenticationPrincipal User user) {
         model.addAttribute("email", user.getEmail());
+        model.addAttribute("sex", user.getSex().toString());
 
         return "profile";
     }

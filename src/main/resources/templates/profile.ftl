@@ -49,12 +49,19 @@
         <label class="col-sm-3 col-md-2 col-form-label">Sex:</label>
         <div class="col-sm-6">
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline1" name="sex" value="MALE" class="custom-control-input">
+                <input type="radio" id="customRadioInline1" name="sex" value="MALE"
+                       class="custom-control-input" <#if sex == "MALE">checked</#if> ><#--${sex??}?string('checked', '')>-->
                 <label class="custom-control-label" for="customRadioInline1">Male</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
-                <input type="radio" id="customRadioInline2" name="sex" value="FEMALE" class="custom-control-input">
+                <input type="radio" id="customRadioInline2" name="sex" value="FEMALE"
+                       class="custom-control-input" <#if sex == "FEMALE">checked</#if> >
                 <label class="custom-control-label" for="customRadioInline2">Female</label>
+            </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline3" name="sex" value="UNKNOWN"
+                       class="custom-control-input" <#if sex == "UNKNOWN">checked</#if> >
+                <label class="custom-control-label" for="customRadioInline3">Unknown</label>
             </div>
         </div>
     </div>
@@ -62,4 +69,12 @@
     <input type="hidden" name="username" value="${name}" />
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
+<script>
+    $('#avatarPhoto').on('change',function(){
+        //get the file name
+        var fileName = $(this).val();
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+    })
+</script>
 </@c.page>

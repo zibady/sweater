@@ -64,6 +64,10 @@
                 <input type="radio" id="customRadioInline2" name="sex" value="FEMALE" class="custom-control-input">
                 <label class="custom-control-label" for="customRadioInline2">Female</label>
             </div>
+            <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="customRadioInline3" name="sex" value="UNKNOWN" class="custom-control-input">
+                <label class="custom-control-label" for="customRadioInline3">Unknown</label>
+            </div>
         </div>
     </div>
     </#if>

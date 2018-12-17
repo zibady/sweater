@@ -27,7 +27,6 @@ public class RegistrationController {
     @PostMapping("/registration")
     public String addUser(
             @RequestParam(name = "password2") String password2,
-//            @RequestParam(name = "sex") String sex,
             @Valid User user, //Spring will automatically create user???
             BindingResult bindingResult, //Validation result
             Model model) {

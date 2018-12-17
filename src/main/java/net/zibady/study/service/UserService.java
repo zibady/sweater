@@ -55,7 +55,7 @@ public class UserService implements UserDetailsService{
             } break;
             default: {
                 user.setSex("unknown");
-                user.setAvatarPhoto("avatar_male.png");
+                user.setAvatarPhoto("avatar_unknown.png");
             } break;
         }
 
