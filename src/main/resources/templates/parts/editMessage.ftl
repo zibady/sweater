@@ -34,3 +34,10 @@
         </form>
     </div>
 </div>
+
+<script type="text/javascript">
+    $('#customFile').on('change', function() {
+        var fileName = $(this).val().split('\\').pop();
+        $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+    });
+</script>

@@ -7,7 +7,7 @@
 <form method="post" enctype="multipart/form-data">
     <div class="form-group">
         <div class="custom-file col-sm-8">
-            <input type="file" name="file" value="file" class="custom-file-input" id="avatarPhoto">
+            <input type="file" name="file" class="custom-file-input" id="avatarPhoto">
             <label class="custom-file-label" for="avatarPhoto">Choose avatar photo</label>
         </div>
     </div>
@@ -69,12 +69,12 @@
     <input type="hidden" name="username" value="${name}" />
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
-<script>
-    $('#avatarPhoto').on('change',function(){
-        //get the file name
-        var fileName = $(this).val();
-        //replace the "Choose a file" label
-        $(this).next('.custom-file-label').html(fileName);
-    })
+
+<script type="text/javascript">
+    $('#avatarPhoto').on('change', function() {
+        var fileName = $(this).val().split('\\').pop();
+        $(this).siblings('.custom-file-label').addClass('selected').html(fileName);
+    });
 </script>
+
 </@c.page>
