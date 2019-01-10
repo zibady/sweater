@@ -12,7 +12,6 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class ControllerUtils {
-
     static Map<String, String> getErrors(BindingResult bindingResult) {
         Collector<FieldError, ?, Map<String, String>> collector = Collectors.toMap(
                 fieldError -> fieldError.getField() + "Error",
@@ -21,6 +20,7 @@ public class ControllerUtils {
         return bindingResult.getFieldErrors().stream().collect(collector);
     }
     static String getNewFile(MultipartFile file, String uploadPath) throws IOException {
+
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDirectory = new File(uploadPath);
 //            if (!uploadDirectory.exists()) {
